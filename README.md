@@ -10,12 +10,15 @@ Cette API permet de gérer et de récupérer des blagues Carambar.
 
 ## Installation
 
-Pour installer les dépendances, exécutez la commande suivante : "npm install"
+Pour installer les dépendances, exécutez la commande suivante :
+npm install
+
 
 ## Lancer l'application
 
 Pour lancer l'application en développement :
-"node app.js"
+node app.js
+
 
 Le serveur se lancera sur `http://localhost:3000`.
 
@@ -23,22 +26,25 @@ Le serveur se lancera sur `http://localhost:3000`.
 
 La documentation interactive de l'API est disponible via Swagger.
 
-- [API Documentation](http://localhost:3000/api-docs)
+- [API Documentation](https://backend-ryok.onrender.com/api-docs)
 
 ## Endpoints principaux
 
 ### Ajouter une nouvelle blague
 
-POST/jokes
+POST https://backend-ryok.onrender.com/jokes
+
 
 ### Récupérer toutes les blagues
 
-GET /jokes
+GET https://backend-ryok.onrender.com/jokes
+
 
 ### Récupérer une blague spécifique
 
-GET /jokes/{id}
+GET https://backend-ryok.onrender.com/jokes/{id}
+
 
 ### Récupérer une blague aléatoire
 
-GET /jokes/random
+GET https://backend-ryok.onrender.com/jokes/random
