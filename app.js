@@ -1,21 +1,30 @@
-//import des modules express, routes, sequelize et swagger
 const express = require('express');
-const jokesRoutes = require('./routes/jokes');
-const db = require('./models');
-const swaggerUi = require('swagger-ui-express');
-const swaggerSpecs = require('./views/swagger-config');
+const { Sequelize } = require('sequelize');
 const app = express();
-app.use(express.json()); 
 
-// Utiliser les routes pour les blagues
+const PORT = process.env.PORT || 3000;
+
+// Connexion à la base de données
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'sqlite',
+    storage: "./database.sqlite",
+    logging: false,
+});
+
+// Middleware JSON
+app.use(express.json());
+
+// Routes de l'API
+const jokesRoutes = require('./routes/jokes');
 app.use('/jokes', jokesRoutes);
 
-//Documentations swagger
+// Documentation Swagger
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpecs = require('./views/swagger-config');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
-// Lancer le serveur
-const PORT = 3000;
-db.sequelize.sync().then(() => {
+// Synchroniser les modèles Sequelize et lancer le serveur
+sequelize.sync().then(() => {
     app.listen(PORT, () => {
         console.log(`Serveur lancé sur http://localhost:${PORT}`);
         console.log(`Documentation Swagger : http://localhost:${PORT}/api-docs`);
