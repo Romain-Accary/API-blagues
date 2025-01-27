@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+const cors = require('cors');
 const express = require('express');
 const { Sequelize } = require('sequelize');
 const app = express();
@@ -15,6 +15,9 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
 
 // Middleware JSON
 app.use(express.json());
+
+// Middleware CORS
+app.use(cors());
 
 // Routes de l'API
 const jokesRoutes = require('./routes/jokes');
